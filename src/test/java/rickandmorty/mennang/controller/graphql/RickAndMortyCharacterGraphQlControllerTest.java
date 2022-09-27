@@ -10,12 +10,6 @@ import rickandmorty.mennang.repository.RickAndMortyCharacterRepository;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-/*
-    Slice test for only focussed part (ProductController) with fast response
-     Dont load all app context
-     Dont load Component Service repository
-     Only load required like controller
-*/
 @GraphQlTest(RickAndMortyCharacterGraphQlController.class)
 class RickAndMortyCharacterGraphQlControllerTest {
 
@@ -30,4 +24,6 @@ class RickAndMortyCharacterGraphQlControllerTest {
         assertNotNull(graphQlTester);
         assertNotNull(repository);
     }
+
+    // TODO: Tests cases should be added for full coverage
 }

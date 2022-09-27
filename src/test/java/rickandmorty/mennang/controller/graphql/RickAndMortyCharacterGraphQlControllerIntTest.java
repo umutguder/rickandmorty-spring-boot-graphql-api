@@ -6,6 +6,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.graphql.test.tester.HttpGraphQlTester;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import rickandmorty.mennang.model.entity.Episode;
+import rickandmorty.mennang.model.entity.Location;
+import rickandmorty.mennang.model.entity.RickAndMortyCharacter;
+import rickandmorty.mennang.model.responsepage.EpisodePage;
+import rickandmorty.mennang.model.responsepage.LocationPage;
 import rickandmorty.mennang.model.responsepage.RickAndMortyCharacterPage;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -75,6 +80,122 @@ class RickAndMortyCharacterGraphQlControllerIntTest {
                 .entity(RickAndMortyCharacterPage.class).isNotEqualTo(null);
     }
 
-    // TODO: Tests cases should be added for full coverage
+    @Test
+    void shouldRespondWithPagedData() {
 
+        /* language=GraphQL */
+        String document = """
+                 query {
+                     # By filter and pagination
+                     characters(page: 2, filter: { name: "rick" }) {
+                         info {
+                             count
+                         }
+                         results {
+                             name
+                         }
+                     }
+                     
+                     locations(page: 2, filter: { name: "rick" }) {
+                         info {
+                             count
+                         }
+                         results {
+                             name
+                         }
+                     }
+                     
+                     episodes(page: 2, filter: { name: "rick" }) {
+                         info {
+                             count
+                         }
+                         results {
+                             name
+                         }
+                     }
+                     
+                     # By Id
+                     character(id: 1) {
+                         id
+                     }
+                     
+                     location(id: 1) {
+                         id
+                     }
+                     
+                     episode(id: 1) {
+                         id
+                     }
+                     
+                     # By Ids
+                     charactersByIds(ids: [1, 2]) {
+                         id
+                     }
+                     locationsByIds(ids: [1, 2]) {
+                         id
+                     }
+                     episodesByIds(ids: [1, 2]) {
+                         id
+                     }
+                 }
+                """;
+
+        graphQlTester.document(document).execute()
+                .path("characters").entity(RickAndMortyCharacterPage.class).isNotEqualTo(null);
+
+        graphQlTester.document(document).execute()
+                .path("locations").entity(LocationPage.class).isNotEqualTo(null);
+
+        graphQlTester.document(document).execute()
+                .path("episodes").entity(EpisodePage.class).isNotEqualTo(null);
+    }
+
+
+    @Test
+    void shouldRespondWithQueriedResultById() {
+
+        /* language=GraphQL */
+        String document = """
+                 query {
+                     # By Id
+                     character(id: 998) {
+                         id
+                     }
+
+                 }
+                """;
+
+        graphQlTester.document(document).execute()
+                .path("character").entity(RickAndMortyCharacter.class);
+    }
+
+    @Test
+    void shouldRespondWithQueriedResultByIdEntityList() {
+
+        /* language=GraphQL */
+        String document = """
+                 query {
+                     # By Ids
+                     charactersByIds(ids: [1, 2]) {
+                         id
+                     }
+                     locationsByIds(ids: [1, 2]) {
+                         id
+                     }
+                     episodesByIds(ids: [1, 2]) {
+                         id
+                     }
+                 }
+                """;
+
+        //By id
+        graphQlTester.document(document).execute()
+                .path("charactersByIds").entityList(RickAndMortyCharacter.class);
+
+        graphQlTester.document(document).execute()
+                .path("locationsByIds").entityList(Location.class).isNotEqualTo(null);
+
+        graphQlTester.document(document).execute()
+                .path("episodesByIds").entityList(Episode.class).isNotEqualTo(null);
+    }
 }
