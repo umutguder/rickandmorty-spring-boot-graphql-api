@@ -10,7 +10,7 @@
     </parent>
     <groupId>rickandmorty.mennan</groupId>
     <artifactId>rickandmorty-spring-boot-graphql-api</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>rickandmorty-spring-boot-graphql-api</name>
     <description>rickandmorty-spring-boot-graphql-api</description>
     <properties>
