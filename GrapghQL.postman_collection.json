@@ -1,0 +1,51 @@
+{
+	"info": {
+		"_postman_id": "a69f3669-c634-4be9-a5c5-8016b9c17197",
+		"name": "GrapghQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17462079"
+	},
+	"item": [
+		{
+			"name": "Query RickAndMorty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\r\n    characters(page: 2, filter: { name: \"rick\" }) {\r\n        info {\r\n            count\r\n            prev\r\n            next\r\n            pages\r\n        }\r\n        results {\r\n            name\r\n            id\r\n        }\r\n    }\r\n    \r\n    locations(page: 2, filter: { name: \"e\" }) {\r\n        info {\r\n            count\r\n            prev\r\n            next\r\n            pages\r\n        }\r\n        results {\r\n            name\r\n            id\r\n        }\r\n    }\r\n    \r\n    episodes( page:1, filter: { name: \"2\" }) {\r\n        info {\r\n            count\r\n            prev\r\n            next\r\n            pages\r\n        }\r\n        results {\r\n            name\r\n            id\r\n        }\r\n    }\r\n    \r\n    # By Id\r\n    character(id: 591) {\r\n        id\r\n        name\r\n    }\r\n    \r\n    location(id: 80) {\r\n        id\r\n        name\r\n    }\r\n    \r\n    episode(id: 2) {\r\n        id\r\n        name\r\n    }\r\n    \r\n    # By Ids\r\n    charactersByIds(ids: [591, 590]) {\r\n        name\r\n        id\r\n    }\r\n    locationsByIds(ids: [80, 81]) {\r\n        name\r\n        id\r\n    }\r\n    episodesByIds(ids: [2, 3]) {\r\n        name\r\n        id\r\n    }\r\n}",
+						"variables": "{\r\n  \"id\": 1\r\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
