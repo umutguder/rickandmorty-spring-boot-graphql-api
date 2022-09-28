@@ -15,7 +15,7 @@ as detailed in the documentation here:  https://rickandmortyapi.com/documentatio
 
 # All possible types of queries in the documentation
 
-# By filter and pagination
+    # By filter and pagination
     query {
         characters(page: 2, filter: { name: "rick" }) {
             info {
