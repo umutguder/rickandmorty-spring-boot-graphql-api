@@ -10,14 +10,14 @@ import org.springframework.data.domain.Page;
 @Builder
 public class PageInfo<T> {
     private long count;
-    private int pages;
-    private int prev;
-    private int next;
+    private Integer pages;
+    private Integer prev;
+    private Integer next;
 
-    public PageInfo(int currentPage, Page<T> page) {
+    public PageInfo(Integer currentPage, Page<T> page) {
         this.count = page.getTotalElements();
         this.pages = page.getTotalPages();
-        this.prev = currentPage > 2 ? currentPage - 1 : -1;
-        this.next = currentPage < page.getTotalPages() ? currentPage + 1 : 0;
+        this.prev = currentPage >= 2 ? currentPage - 1 : null;
+        this.next = currentPage < page.getTotalPages() ? currentPage + 1 : null;
     }
 }
