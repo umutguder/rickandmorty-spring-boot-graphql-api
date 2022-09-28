@@ -1,5 +1,3 @@
-#  The Back-End Challenge:
-
 # Task:
 
 Please develop a small API using the language of your choice that will enable a front end application to connect into your API and search for a list of
@@ -17,54 +15,92 @@ as detailed in the documentation here:  https://rickandmortyapi.com/documentatio
 
 # All possible types of queries in the documentation
 
-                     # By filter and pagination
-                     characters(page: 2, filter: { name: "rick" }) {
-                         info {
-                             count
-                         }
-                         results {
-                             name
-                         }
-                     }
-                     
-                     locations(page: 2, filter: { name: "rick" }) {
-                         info {
-                             count
-                         }
-                         results {
-                             name
-                         }
-                     }
-                     
-                     episodes(page: 2, filter: { name: "rick" }) {
-                         info {
-                             count
-                         }
-                         results {
-                             name
-                         }
-                     }
-                     
-                     # By Id
-                     character(id: 1) {
-                         id
-                     }
-                     
-                     location(id: 1) {
-                         id
-                     }
-                     
-                     episode(id: 1) {
-                         id
-                     }
-                     
-                     # By Ids
-                     charactersByIds(ids: [1, 2]) {
-                         id
-                     }
-                     locationsByIds(ids: [1, 2]) {
-                         id
-                     }
-                     episodesByIds(ids: [1, 2]) {
-                         id
-                     }
+# By filter and pagination
+    query {
+        characters(page: 2, filter: { name: "rick" }) {
+            info {
+                count
+                prev
+                next
+                pages
+            }
+            results {
+                name
+                id
+            }
+        }
+    
+        locations(page: 2, filter: { name: "e" }) {
+            info {
+                count
+                prev
+                next
+                pages
+            }
+            results {
+                name
+                id
+            }
+        }
+        
+        episodes( page:1, filter: { name: "2" }) {
+            info {
+                count
+                prev
+                next
+                pages
+            }
+            results {
+                name
+                id
+            }
+        }
+        
+        # By Id
+        character(id: 591) {
+            id
+            name
+        }
+        
+        location(id: 80) {
+            id
+            name
+        }
+        
+        episode(id: 2) {
+            id
+            name
+        }
+        
+        # By Ids
+        charactersByIds(ids: [591, 590]) {
+            name
+            id
+        }
+        locationsByIds(ids: [80, 81]) {
+            name
+            id
+        }
+        episodesByIds(ids: [2, 3]) {
+            name
+            id
+        }
+    }
+
+# Running the Application
+
+1-  mvn clean package (Java version 17 should be supported through the available maven version)
+
+2-(a) java -jar rickandmorty-spring-boot-graphql-api-1.0.0.jar   
+            (Java version 17 should be supported)
+OR
+
+2-(b) docker build -t rickandmorty-spring-boot-graphql-api .
+
+3- docker run -p8080:8080 rickandmorty-spring-boot-graphql-api
+
+# Accessing/Testing the developed API
+
+1- http://localhost:8080/graphiql?path=/graphql
+2- Postman Collection (Sample postman collection is added to the project named as GrapghQL.postman_collection.json)
+3- Through Altair GraphQL Client Extension with path http://localhost:8080/graphql
