@@ -87,6 +87,20 @@ as detailed in the documentation here:  https://rickandmortyapi.com/documentatio
         }
     }
 
+# Development Details
+
+This is a Spring Boot, Java 17 project. It uses:
+
+- Java 17
+- Spring Boot: Version 2.7.4
+- JUnit 5: Developer-side testing
+- Docker for Containerization
+- Maven: build automation (Compiler Plugin 3.10.1 Resource Plugin 3.2.0)
+- Intelli (later than 2022.1 version)
+- GraphQL
+- javafaker for fake data creation
+- h2 as embedded database
+- 
 # Running the Application
 
 1-  mvn clean package (Java version 17 should be supported through the available maven version)
