@@ -78,6 +78,7 @@ public class SampleDataLoader implements CommandLineRunner {
                 .mapToObj(i -> Location.builder()
                         .name(faker.rickAndMorty().location())
                         .residents(new HashSet<>())
+                        .created(LocalDateTime.now().minusYears(8).plusDays(7 * i))
                         .build()
                 ).toList();
     }
@@ -87,6 +88,8 @@ public class SampleDataLoader implements CommandLineRunner {
                 .mapToObj(i -> Episode.builder()
                         .name(String.valueOf(i))
                         .characters(new HashSet<>())
-                        .created(LocalDateTime.now().minusYears(8).plusDays(7 * i)).build()).toList();
+                        .created(LocalDateTime.now().minusYears(8).plusDays(7 * i))
+                        .build()
+                ).toList();
     }
 }

@@ -13,6 +13,7 @@ import rickandmorty.mennang.model.responsepage.PageRequestAdapter;
 import rickandmorty.mennang.model.responsepage.RickAndMortyCharacterPage;
 import rickandmorty.mennang.repository.RickAndMortyCharacterRepository;
 
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @Controller
@@ -37,8 +38,8 @@ public class RickAndMortyCharacterGraphQlController {
 
     @QueryMapping()
     public RickAndMortyCharacterPage characters(@Argument CharacterFilter filter,
-                                                @Argument int page,
-                                                @Argument int size) {
+                                                @Argument @Min(value = 0, message = "Must be greater than -1") int page,
+                                                @Argument @Min(value = 1, message = "Must be greater than 0") int size) {
 
         ExampleMatcher matcher = ExampleMatcher.matchingAny()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
